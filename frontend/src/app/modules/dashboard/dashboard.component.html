@@ -1,0 +1,154 @@
+<div class="dashboard">
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <h1>Welcome to Officer Management System</h1>
+    <p>Manage your organization efficiently</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards" *ngIf="summary">
+    <div class="card summary-card">
+      <div class="card-icon" style="background: #dbeafe;">
+        <span style="color: #3b82f6;">👥</span>
+      </div>
+      <div class="card-content">
+        <h3>Total Employees</h3>
+        <p class="value">{{ summary.totalEmployees.count }}</p>
+        <p class="change" [class.positive]="summary.totalEmployees.change >= 0">
+          {{ summary.totalEmployees.change >= 0 ? '+' : '' }}{{ summary.totalEmployees.change }}%
+        </p>
+      </div>
+    </div>
+
+    <div class="card summary-card">
+      <div class="card-icon" style="background: #fee2e2;">
+        <span style="color: #ef4444;">📅</span>
+      </div>
+      <div class="card-content">
+        <h3>Employee Absence</h3>
+        <p class="value">{{ summary.employeeAbsence.count }}</p>
+        <p class="change" [class.positive]="summary.employeeAbsence.change <= 0">
+          {{ summary.employeeAbsence.change >= 0 ? '+' : '' }}{{ summary.employeeAbsence.change }}%
+        </p>
+      </div>
+    </div>
+
+    <div class="card summary-card">
+      <div class="card-icon" style="background: #d1fae5;">
+        <span style="color: #10b981;">📄</span>
+      </div>
+      <div class="card-content">
+        <h3>Total Documents</h3>
+        <p class="value">{{ summary.totalDocuments.count }}</p>
+        <p class="change" [class.positive]="summary.totalDocuments.change >= 0">
+          {{ summary.totalDocuments.change >= 0 ? '+' : '' }}{{ summary.totalDocuments.change }}%
+        </p>
+      </div>
+    </div>
+
+    <div class="card summary-card">
+      <div class="card-icon" style="background: #e0e7ff;">
+        <span style="color: #6366f1;">✉️</span>
+      </div>
+      <div class="card-content">
+        <h3>Total Circulars</h3>
+        <p class="value">{{ summary.totalCirculars.count }}</p>
+        <p class="change" [class.positive]="summary.totalCirculars.change >= 0">
+          {{ summary.totalCirculars.change >= 0 ? '+' : '' }}{{ summary.totalCirculars.change }}%
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-row">
+    <div class="card chart-card">
+      <h3>Employee Attendance Summary</h3>
+      <div class="chart-container">
+        <canvas baseChart
+          [data]="lineChartData"
+          [options]="lineChartOptions"
+          type="line">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="card chart-card">
+      <h3>Document Submission</h3>
+      <div class="chart-container">
+        <canvas baseChart
+          [data]="doughnutChartData"
+          [options]="doughnutChartOptions"
+          type="doughnut">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tables -->
+  <div class="tables-row">
+    <div class="card table-card">
+      <h3>Employee Attendance List</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Date</th>
+              <th>Clock In</th>
+              <th>Clock Out</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attendance of attendanceList">
+              <td>{{ attendance.employeeId?.name || 'N/A' }}</td>
+              <td>{{ attendance.date | date:'short' }}</td>
+              <td>{{ attendance.clockIn }}</td>
+              <td>{{ attendance.clockOut }}</td>
+              <td>
+                <span class="badge" [class.wfh]="attendance.type === 'WFH'">
+                  {{ attendance.type }}
+                </span>
+              </td>
+            </tr>
+            <tr *ngIf="attendanceList.length === 0">
+              <td colspan="5" class="empty">No attendance records found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card table-card">
+      <h3>Circular Letter</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Reference</th>
+              <th>Priority</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let circular of circularList">
+              <td>{{ circular.title }}</td>
+              <td>{{ circular.referenceNumber }}</td>
+              <td>
+                <span class="priority-badge" [ngClass]="getPriorityClass(circular.priority)">
+                  {{ circular.priority.replace('_', ' ') }}
+                </span>
+              </td>
+              <td>{{ circular.date | date:'short' }}</td>
+            </tr>
+            <tr *ngIf="circularList.length === 0">
+              <td colspan="4" class="empty">No circular letters found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

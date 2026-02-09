@@ -1,0 +1,102 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem;
+
+  .login-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+
+      h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 0.5rem 0;
+      }
+
+      p {
+        color: #64748b;
+        margin: 0;
+      }
+    }
+
+    .login-form {
+      .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+          display: block;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #1e293b;
+          margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border: 1px solid #e2e8f0;
+          border-radius: 0.5rem;
+          font-size: 0.9375rem;
+          transition: all 0.2s;
+
+          &:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+          }
+        }
+
+        .error {
+          color: #ef4444;
+          font-size: 0.75rem;
+          margin-top: 0.25rem;
+        }
+      }
+
+      .error-message {
+        background: #fee2e2;
+        color: #dc2626;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 0.875rem;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover:not(:disabled) {
+          background: #2563eb;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
