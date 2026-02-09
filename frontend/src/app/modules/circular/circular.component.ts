@@ -102,7 +102,7 @@ export class CircularComponent implements OnInit {
   }
 
   load(): void {
-    this.service.getAll().subscribe(data => this.items = data);
+    this.service.getAll().subscribe(data => this.items = data.circulars || data);
   }
 
   edit(item: CircularLetter): void {

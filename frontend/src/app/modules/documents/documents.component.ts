@@ -97,7 +97,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   load(): void {
-    this.service.getAll().subscribe(data => this.items = data);
+    this.service.getAll().subscribe(data => this.items = data.documents || data);
   }
 
   edit(item: Document): void {

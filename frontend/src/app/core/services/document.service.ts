@@ -12,8 +12,8 @@ export class DocumentService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Document[]> {
-    return this.http.get<Document[]>(this.apiUrl);
+  getAll(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 
   getById(id: string): Observable<Document> {

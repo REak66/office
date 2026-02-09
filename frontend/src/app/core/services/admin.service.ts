@@ -13,26 +13,26 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
+    return this.http.get<User[]>(this.apiUrl);
   }
 
   getUserById(id: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/users/${id}`);
+    return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
   createUser(user: Partial<User> & { password: string }): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/users`, user);
+    return this.http.post<User>(this.apiUrl, user);
   }
 
   updateUser(id: string, user: Partial<User>): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/users/${id}`, user);
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
   }
 
   deleteUser(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/users/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   changeUserRole(id: string, role: string): Observable<User> {
-    return this.http.patch<User>(`${this.apiUrl}/users/${id}/role`, { role });
+    return this.http.patch<User>(`${this.apiUrl}/${id}/role`, { role });
   }
 }

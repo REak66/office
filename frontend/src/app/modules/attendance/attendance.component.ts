@@ -118,17 +118,21 @@ export class AttendanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
-    this.employeeService.getAll().subscribe(data => this.employees = data);
+    this.employeeService.getAll().subscribe(data => this.employees = data.employees || data);
   }
 
   load(): void {
-    this.service.getAll().subscribe(data => this.items = data);
+    this.service.getAll().subscribe(data => this.items = data.attendance || data);
   }
 
   edit(item: Attendance): void {
     this.showForm = true;
     this.editingId = item._id;
-    this.form.patchValue(item);
+    this.form.patchValue({
+      ...item,
+      employeeId: item.employeeId._id || item.employeeId,
+      date: item.date ? new Date(item.date).toISOString().split('T')[0] : ''
+    });
   }
 
   delete(id: string): void {

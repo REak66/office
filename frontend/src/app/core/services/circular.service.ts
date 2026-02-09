@@ -12,8 +12,8 @@ export class CircularService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<CircularLetter[]> {
-    return this.http.get<CircularLetter[]>(this.apiUrl);
+  getAll(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 
   getById(id: string): Observable<CircularLetter> {
