@@ -2,6 +2,86 @@
 
 ## Security Scan Results
 
+### Dependency Vulnerabilities - CRITICAL ISSUES IDENTIFIED
+
+#### ✅ FIXED: Multer (Backend) - DoS Vulnerabilities
+**Status: RESOLVED**
+
+- **Package**: multer 1.4.5-lts.2 → 2.0.2
+- **Vulnerabilities Fixed**: 
+  1. DoS via unhandled exception from malformed request
+  2. DoS via unhandled exception
+  3. DoS from maliciously crafted requests
+  4. DoS via memory leaks from unclosed streams
+- **Action Taken**: Upgraded to multer 2.0.2
+
+#### ⚠️ ANGULAR XSS VULNERABILITIES - REQUIRES ATTENTION
+
+**Current Version**: Angular 17.3.12
+**Status**: VULNERABLE - No patch available for Angular 17.x
+
+**Identified Vulnerabilities**:
+
+1. **XSRF Token Leakage via Protocol-Relative URLs**
+   - **Severity**: Medium
+   - **Affected**: Angular < 19.2.16
+   - **Patched in**: 19.2.16, 20.3.14, 21.0.1
+   - **Impact**: XSRF tokens could be leaked via protocol-relative URLs in HTTP client
+
+2. **XSS via Unsanitized SVG Script Attributes**
+   - **Severity**: High
+   - **Affected**: Angular <= 18.2.14
+   - **Patched in**: 19.2.18, 20.3.16, 21.0.7, 21.1.0-rc.0
+   - **Impact**: SVG script attributes not properly sanitized, allowing XSS attacks
+
+3. **Stored XSS via SVG Animation, SVG URL and MathML Attributes**
+   - **Severity**: High
+   - **Affected**: Angular <= 18.2.14
+   - **Patched in**: 19.2.17, 20.3.15, 21.0.2
+   - **Impact**: SVG animations and MathML attributes can contain malicious scripts
+
+**Mitigation Strategies** (Until Angular Upgrade):
+
+1. **Input Sanitization**
+   - Never render user-provided SVG content directly
+   - Use Angular's DomSanitizer for all dynamic content
+   - Validate all SVG input on the backend before storage
+
+2. **Content Security Policy (CSP)**
+   - Implement strict CSP headers to prevent inline scripts
+   - Add the following to your server configuration:
+     ```
+     Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;
+     ```
+
+3. **XSRF Protection**
+   - Angular's built-in XSRF protection is active by default
+   - Ensure all API endpoints use absolute URLs (not protocol-relative)
+   - Never use protocol-relative URLs (//example.com/api)
+
+4. **Avoid SVG/MathML User Input**
+   - Do not allow users to upload or create SVG content in the current version
+   - If SVG is needed, use pre-approved, server-side generated SVGs only
+   - Disable or remove any features that accept MathML input
+
+**Recommended Actions**:
+
+**OPTION 1: Upgrade to Angular 19+ (RECOMMENDED for Production)**
+```bash
+cd frontend
+ng update @angular/core@19 @angular/cli@19 --force
+npm install --legacy-peer-deps
+```
+Note: This is a major version upgrade and requires testing.
+
+**OPTION 2: Apply Workarounds (Temporary)**
+- Implement all mitigation strategies above
+- Add CSP headers
+- Disable SVG/MathML user input features
+- Plan for Angular upgrade in next sprint
+
+---
+
 ### CodeQL Analysis - JavaScript
 **Total Alerts: 82**
 
@@ -130,6 +210,9 @@ router.post('/register', authLimiter, register);
 
 Before deploying to production, ensure:
 
+- [ ] **CRITICAL: Upgrade Angular to 19.2.18+** to fix XSS vulnerabilities
+- [ ] **CRITICAL: Implement CSP headers** if staying on Angular 17
+- [ ] **CRITICAL: Disable user-provided SVG/MathML** until Angular upgrade
 - [ ] **Implement rate limiting** (see recommendations above)
 - [ ] **Change JWT_SECRET** to a strong, random value
 - [ ] **Use HTTPS** (SSL/TLS certificates)
@@ -139,7 +222,7 @@ Before deploying to production, ensure:
 - [ ] **Enable MongoDB encryption at rest**
 - [ ] **Implement logging and monitoring**
 - [ ] **Set up backup and disaster recovery**
-- [ ] **Add security headers** (helmet.js)
+- [ ] **Add security headers** (helmet.js with CSP)
 - [ ] **Implement CSRF protection** if using cookies
 - [ ] **Regular security audits** (npm audit, dependency updates)
 - [ ] **Set up intrusion detection**
@@ -150,16 +233,48 @@ Before deploying to production, ensure:
 
 ## Conclusion
 
-The Officer Management System has been implemented with **good security practices** for authentication, authorization, and data protection. The missing rate limiting is the only significant security concern identified, and it can be easily addressed before production deployment using the recommendations above.
+The Officer Management System has been implemented with **security awareness**, but **critical XSS vulnerabilities exist in Angular 17.3.12** that require immediate attention before production deployment.
 
-**Current Security Status: Adequate for development and testing**
-**Production-Ready Status: Requires rate limiting implementation**
+### Current Security Status:
+
+✅ **Backend Security**: Good
+- JWT authentication implemented
+- Password hashing (bcrypt)
+- Multer upgraded to 2.0.2 (DoS vulnerabilities fixed)
+- Input validation present
+
+⚠️ **Frontend Security**: REQUIRES ACTION
+- Angular 17.3.12 has known XSS vulnerabilities
+- No patches available for Angular 17.x
+- Requires upgrade to Angular 19.2.18+ OR implementation of strict mitigation strategies
+
+⚠️ **API Security**: REQUIRES IMPROVEMENT
+- Missing rate limiting on all endpoints
+- Easy to implement (see recommendations above)
+
+### Security Recommendation:
+
+**FOR PRODUCTION DEPLOYMENT:**
+1. ✅ Backend is ready (multer patched)
+2. ⚠️ **MUST upgrade Angular to 19.2.18+** to fix XSS vulnerabilities
+3. ⚠️ **MUST implement rate limiting** to prevent DoS attacks
+4. ⚠️ **MUST implement CSP headers** for defense in depth
+
+**FOR DEVELOPMENT/TESTING:**
+- Current version is acceptable with precautions:
+  - Do not allow user-provided SVG or MathML content
+  - Use only absolute URLs in HTTP requests
+  - Implement Angular's DomSanitizer for all dynamic content
 
 ---
 
-**Report Generated:** 2026-02-09
-**CodeQL Analysis:** 82 rate limiting issues identified
-**Critical Vulnerabilities:** 0
-**High Vulnerabilities:** 0
-**Medium Vulnerabilities:** 82 (all rate limiting)
-**Low Vulnerabilities:** 0
+**Current Security Status: Adequate for development with restrictions**
+**Production-Ready Status: Requires Angular upgrade + rate limiting**
+
+---
+
+**Report Updated:** 2026-02-09
+**Critical Vulnerabilities Fixed:** Multer DoS (4 vulnerabilities)
+**Critical Vulnerabilities Remaining:** Angular XSS (Multiple)
+**Medium Vulnerabilities:** 82 rate limiting issues
+**Severity**: Angular upgrade CRITICAL before production deployment
