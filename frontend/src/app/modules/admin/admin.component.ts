@@ -5,10 +5,9 @@ import { AdminService } from '../../core/services/admin.service';
 import { User } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-admin',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-admin',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>User Management</h1>
@@ -75,7 +74,7 @@ import { User } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class AdminComponent implements OnInit {
   items: User[] = [];

@@ -5,10 +5,9 @@ import { CircularService } from '../../core/services/circular.service';
 import { CircularLetter } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-circular',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-circular',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>Circular Letters</h1>
@@ -79,7 +78,7 @@ import { CircularLetter } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class CircularComponent implements OnInit {
   items: CircularLetter[] = [];

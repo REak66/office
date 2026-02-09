@@ -4,10 +4,9 @@ import { FileService } from '../../core/services/file.service';
 import { FileUpload } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-file-mgmt',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-file-mgmt',
+    imports: [CommonModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>File Management</h1>
@@ -44,7 +43,7 @@ import { FileUpload } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class FileMgmtComponent implements OnInit {
   items: FileUpload[] = [];

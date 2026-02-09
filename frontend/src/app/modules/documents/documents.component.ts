@@ -5,10 +5,9 @@ import { DocumentService } from '../../core/services/document.service';
 import { Document } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-documents',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-documents',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>Document Management</h1>
@@ -75,7 +74,7 @@ import { Document } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class DocumentsComponent implements OnInit {
   items: Document[] = [];

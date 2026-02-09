@@ -5,10 +5,9 @@ import { NewsService } from '../../core/services/news.service';
 import { News } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-news',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-news',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>News Management</h1>
@@ -61,7 +60,7 @@ import { News } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class NewsComponent implements OnInit {
   items: News[] = [];

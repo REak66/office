@@ -5,10 +5,9 @@ import { EventService } from '../../core/services/event.service';
 import { Event } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-events',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-events',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>Event Management</h1>
@@ -69,7 +68,7 @@ import { Event } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class EventsComponent implements OnInit {
   items: Event[] = [];

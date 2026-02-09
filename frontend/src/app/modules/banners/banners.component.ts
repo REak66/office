@@ -5,10 +5,9 @@ import { BannerService } from '../../core/services/banner.service';
 import { Banner } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-banners',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-banners',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>Banner Management</h1>
@@ -68,7 +67,7 @@ import { Banner } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class BannersComponent implements OnInit {
   items: Banner[] = [];

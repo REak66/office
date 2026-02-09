@@ -5,11 +5,10 @@ import { EmployeeService } from '../../core/services/employee.service';
 import { Employee } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-employees',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './employees.component.html',
-  styleUrl: './employees.component.scss'
+    selector: 'app-employees',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './employees.component.html',
+    styleUrl: './employees.component.scss'
 })
 export class EmployeesComponent implements OnInit {
   employees: Employee[] = [];

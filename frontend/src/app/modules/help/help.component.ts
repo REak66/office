@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-help',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-help',
+    imports: [CommonModule],
+    template: `
     <div class="page">
       <h1>Help</h1>
       <div class="card">
@@ -20,6 +19,6 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class HelpComponent {}

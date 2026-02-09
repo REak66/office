@@ -8,11 +8,10 @@ import { CircularService } from '../../core/services/circular.service';
 import { DashboardSummary, Attendance, CircularLetter } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [CommonModule, BaseChartDirective],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    imports: [CommonModule, BaseChartDirective],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
   summary: DashboardSummary | null = null;

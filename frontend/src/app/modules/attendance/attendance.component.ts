@@ -6,10 +6,9 @@ import { EmployeeService } from '../../core/services/employee.service';
 import { Attendance, Employee } from '../../shared/models/models';
 
 @Component({
-  selector: 'app-attendance',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-attendance',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="page">
       <div class="page-header">
         <h1>Attendance Management</h1>
@@ -92,7 +91,7 @@ import { Attendance, Employee } from '../../shared/models/models';
       </div>
     </div>
   `,
-  styleUrls: ['../employees/employees.component.scss']
+    styleUrls: ['../employees/employees.component.scss']
 })
 export class AttendanceComponent implements OnInit {
   items: Attendance[] = [];
