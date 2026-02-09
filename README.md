@@ -83,11 +83,21 @@ Frontend will run on `http://localhost:4200`
 
 See `backend/README.md` for detailed API documentation.
 
+## Seeding Sample Data
+
+To populate the database with sample data (250 employees, attendance records, documents, etc.):
+
+```bash
+cd backend
+npm run seed
+```
+
 ## Default Users
 
-The system comes with default admin user:
-- Email: admin@example.com
-- Password: admin123
+After seeding, you can login with:
+- **Super Admin**: superadmin@egovern.com / password123
+- **Admin**: admin@egovern.com / password123  
+- **Employee**: employee1@egovern.com / password123
 
 ## License
 
