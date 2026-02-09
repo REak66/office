@@ -8,7 +8,7 @@ import { CircularLetter } from '../../shared/models/models';
   providedIn: 'root'
 })
 export class CircularService {
-  private apiUrl = `${environment.apiUrl}/circular-letters`;
+  private apiUrl = `${environment.apiUrl}/circulars`;
 
   constructor(private http: HttpClient) {}
 

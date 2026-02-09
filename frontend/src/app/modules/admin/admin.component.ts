@@ -105,6 +105,7 @@ export class AdminComponent implements OnInit {
     this.editingId = item._id;
     this.form.patchValue(item);
     this.form.get('password')?.clearValidators();
+    this.form.get('password')?.updateValueAndValidity();
   }
 
   delete(id: string): void {
