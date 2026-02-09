@@ -2,6 +2,17 @@
 
 A complete full-stack web application for managing organizational operations including employees, attendance, documents, circulars, events, news, and more.
 
+## ⚠️ SECURITY NOTICE
+
+**IMPORTANT**: This application uses Angular 17.3.12 which has known XSS vulnerabilities. 
+
+**For Development/Testing**: Safe to use with restrictions (see SECURITY_SUMMARY.md)
+
+**Before Production Deployment**: 
+- **MUST upgrade Angular to 19.2.18+** to fix XSS vulnerabilities
+- **MUST implement rate limiting** on API endpoints
+- See `SECURITY_SUMMARY.md` and `ANGULAR_SECURITY_UPGRADE.md` for details
+
 ## Project Structure
 
 ```
