@@ -42,3 +42,9 @@ logs
 # Test coverage
 coverage/
 .nyc_output/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+ecommerce/*.db
